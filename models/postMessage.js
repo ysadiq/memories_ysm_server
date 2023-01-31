@@ -9,11 +9,9 @@ const postSchema = mongoose.Schema({
     likeCount: {
         type: Number,
         default: 0
-    },
-    createdAt:  {
-        type: Date,
-        default: new Date()
     }
+}, {
+    timestamps: true
 });
 
 // Convert schema into model
