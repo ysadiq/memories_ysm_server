@@ -104,5 +104,23 @@ export const likePost = async (req, res) => {
     const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
 
     res.json(updatedPost)
+}
 
+export const commentPost = async (req, res) => {
+    const { id } = req.params;
+    const { comment } = req.body;
+
+    if (!req.userId) return res.json({ message: 'Unauthenticated' });
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
+
+    if (!comment) return res.json({ message: 'comment not found' });
+
+    const post = await PostMessage.findById(id);
+
+    post.comments.push(comment);
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+
+    res.json(updatedPost);
 }
