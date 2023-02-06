@@ -16,6 +16,10 @@ app.use(cors());
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
 
+app.get('/', (req, res) => {
+    res.send('APP IS RUNNING');
+});
+
 // useNewUrlParser + useUnifiedTopology used to avoid errors and warnings.
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
